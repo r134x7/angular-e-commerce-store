@@ -12,4 +12,8 @@ import { Component } from '@angular/core';
 })
 export class CategoryMenuComponent {
 
+  /*
+  need global state to get state.categories:
+  need to query categoryData
+  */
 }
