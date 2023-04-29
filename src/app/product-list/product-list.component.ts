@@ -32,8 +32,7 @@ template reference
       <div className="my-2">
       <h2>Our Products:</h2>
 
-      <!-- {state.products.length ? ( -->
-        <div *ngIf="products" className="flex-row">
+        <div *ngIf="products.length !== 0; else elseBlock" className="flex-row">
           <div *ngFor="let product of products" className="card px-1 py-1"> 
           <a 
             routerLink="/products/{{product.id}}" 
@@ -51,6 +50,13 @@ template reference
           <!-- <button onClick={addToCart}>Add to cart</button> -->
           </div>
         </div>
+        <ng-template #elseBlock>
+          <h3>You haven't added any products yet!</h3>
+          <img 
+            alt="loading"
+            src="../../assets/spinner.gif"
+          />
+        </ng-template>
       </div>
   `,
   styles: [
@@ -65,12 +71,12 @@ export class ProductListComponent {
   // dependency injection site. Becomes a singleton instance of ProductsService.
   constructor(private productsService: ProductsService) {}
 
-  // rely on ngOnInit lifecycle hook to call getProducts
+  // // rely on ngOnInit lifecycle hook to call getProducts
   ngOnInit(): void {
     this.getProducts();
   }
 
-  // implement method to call products from mock
+  // // implement method to call products from mock
   getProducts(): void {
     this.products = this.productsService.getProducts();
   }
