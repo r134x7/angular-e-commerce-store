@@ -6,9 +6,7 @@ export interface Category {
 export interface Order {
     id: number;
     purchaseDate: Date;
-    products: [
-        Product,
-    ]
+    products: Product[];
 };
 
 export interface Product {
@@ -27,5 +25,5 @@ export interface User {
     lastName: string;
     email: string;
     password: string;
-    orders: [Order]
+    orders: Order[]; 
 };
