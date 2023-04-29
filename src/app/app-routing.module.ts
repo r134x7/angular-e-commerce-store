@@ -8,11 +8,11 @@ import { HomelayoutComponent } from './homelayout/homelayout.component';
 import { NoMatchComponent } from './no-match/no-match.component';
 
 const routes: Routes = [
-  { path: "/", pathMatch: "full", component: HomelayoutComponent},
-  { path: "/login", component: LoginComponent},
-  { path: "/signup", component: SignUpComponent},
-  { path: "/orderHistory", component: OrderHistoryComponent },
-  { path: "/products/:id", component: DetailComponent},
+  { path: "", pathMatch: "full", component: HomelayoutComponent},
+  { path: "login", component: LoginComponent},
+  { path: "signup", component: SignUpComponent},
+  { path: "orderHistory", component: OrderHistoryComponent },
+  { path: "products/:id", component: DetailComponent},
   { path: "**", component: NoMatchComponent},
 ];
 

@@ -19,6 +19,11 @@ template reference
       </div>
       <button onClick={addToCart}>Add to cart</button>
     </div>
+
+    // this won't work yet:
+                <a 
+            routerLink="/products/{{product.id}}" 
+            >
 */
 
 @Component({
@@ -30,7 +35,15 @@ template reference
       <!-- {state.products.length ? ( -->
         <div *ngIf="products" className="flex-row">
           <div *ngFor="let product of products" className="card px-1 py-1"> 
-            <p>{{product.name}}</p>
+          <a 
+            routerLink="/products/{{product.id}}" 
+            >
+              <img
+                alt="{{product.name}}"
+                src="../../assets/{{product.image}}"
+              />
+              <p>{{product.name}}</p>
+            </a>
             <div>
               <div>{{product.quantity}} in stock</div>
               <span>{{product.price}}</span>
