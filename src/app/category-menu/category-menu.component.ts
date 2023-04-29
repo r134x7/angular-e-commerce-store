@@ -1,11 +1,31 @@
 import { Component } from '@angular/core';
 
+/*
+reference
+    <div>
+      <h2>Choose a Category:</h2>
+      {state.categories.map((item) => (
+        <button
+          key={item._id}
+          onClick={() => {
+            handleClick(item._id);
+          }}
+        >
+          {item.name}
+        </button>
+      ))}
+    </div>
+*/
+
 @Component({
   selector: 'app-category-menu',
   template: `
-    <p>
-      category-menu works!
-    </p>
+    <div>
+      <h2>Choose a Category:</h2>
+        <button
+        >
+        </button>
+    </div>
   `,
   styles: [
   ]
@@ -13,7 +33,6 @@ import { Component } from '@angular/core';
 export class CategoryMenuComponent {
 
   /*
-  need global state to get state.categories:
-  need to query categoryData
+  need to query category observables
   */
 }
