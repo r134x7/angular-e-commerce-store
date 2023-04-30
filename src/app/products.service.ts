@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { products } from './mock-product';
 import { Product } from './models';
+import { Observable, of } from "rxjs";
 
 // provided in the root level of the app
 @Injectable({
@@ -13,7 +14,8 @@ export class ProductsService {
 
   constructor() { }
 
-  getProducts(): Product[] {
-    return products;
+  getProducts(): Observable<Product[]> {
+    const productsCall = of(products);
+    return productsCall;
   }
 }

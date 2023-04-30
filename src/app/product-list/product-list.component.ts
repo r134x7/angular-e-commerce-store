@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, from, map, tap } from "rxjs";
 import { ProductsService } from '../products.service';
 import { Product } from '../models';
 
@@ -78,7 +77,8 @@ export class ProductListComponent {
 
   // // implement method to call products from mock
   getProducts(): void {
-    this.products = this.productsService.getProducts();
+    this.productsService.getProducts()
+      .subscribe(products => this.products = products);
   }
 
 }
