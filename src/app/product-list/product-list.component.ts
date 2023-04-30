@@ -4,7 +4,7 @@ import { ProductsService } from '../products.service';
 import { Product } from '../models';
 
 /*
-template reference
+JSX reference
     <div className="card px-1 py-1">
       <Link to={`/products/${_id}`}>
         <img
