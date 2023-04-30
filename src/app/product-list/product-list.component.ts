@@ -68,7 +68,9 @@ export class ProductListComponent {
   products: Product[] = [];
 
   // dependency injection site. Becomes a singleton instance of ProductsService.
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService) {
+    this.productsService.currentValue.subscribe(products => this.products = products);
+  }
 
   // // rely on ngOnInit lifecycle hook to call getProducts
   ngOnInit(): void {
@@ -77,8 +79,9 @@ export class ProductListComponent {
 
   // // implement method to call products from mock
   getProducts(): void {
-    this.productsService.getProducts()
-      .subscribe(products => this.products = products);
+    // this.productsService.getProducts()
+      // .subscribe(products => this.products = products);
+      this.productsService.currentValue.subscribe(products => this.products = products);
   }
 
 }

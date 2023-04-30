@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../categories.service';
 import { Category } from '../models';
 import { ProductsService } from '../products.service';
+import { ProductListComponent } from '../product-list/product-list.component';
 
 /*
 JSX reference
@@ -27,7 +28,7 @@ JSX reference
       <h2>Choose a Category:</h2>
         <button
           *ngFor="let category of categories; trackBy: categoryTrack"
-          (click)="filterCategory(category.id)"
+          (click)="filterProductsByCategory(category.id)"
         >
         {{category.name}}
         </button>
@@ -43,7 +44,7 @@ export class CategoryMenuComponent {
   */
   categories: Category[] = [];
 
-  constructor(private categoriesService: CategoriesService) {}
+  constructor(private categoriesService: CategoriesService, private productService: ProductsService) {}
 
   ngOnInit(): void {
     this.getCategories();
@@ -60,13 +61,14 @@ export class CategoryMenuComponent {
     this.categories = this.categories.filter(elem => elem.id === categoryId)
   }
 
-  // need to figure out how to subscribe to productsService from across components
-  // filterProductsByCategory(categoryId: number): void {
-  //   this.productsService 
-  // }
 
   categoryTrack(index: number, item: any) {
     return item.id;
+  }
+
+  // need to figure out how to subscribe to productsService from across components
+  filterProductsByCategory(categoryId: number): void {
+    this.productService.filterProducts(categoryId);
   }
 
 }
