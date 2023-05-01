@@ -16,6 +16,10 @@ export class ProductsService {
 
   constructor() { }
 
+  // getProducts(): Observable<Product[]> {
+  //   const productsCall = of(products);
+  //   return productsCall;
+  // }
   // getProducts() {
   //   const productsCall = this.currentValue.subscribe(elem => this.currentValue = of(products));
   //   console.log(productsCall);

@@ -1,11 +1,59 @@
 import { Component } from '@angular/core';
+import { Cart } from '../models';
+
+/*
+JSX Reference
+    <div className="cart">
+      <div className="close" onClick={toggleCart}>
+        [close]
+      </div>
+      <h2>Shopping Cart</h2>
+      {state.cart.length ? (
+        <div>
+          {state.cart.map((item) => (
+            <CartItem key={item._id} item={item} />
+          ))}
+
+          <div className="flex-row space-between">
+            <strong>Total: ${calculateTotal()}</strong>
+
+            {Auth.loggedIn() ? (
+              <button onClick={submitCheckout}>Checkout</button>
+            ) : (
+              <span>(log in to check out)</span>
+            )}
+          </div>
+        </div>
+      ) : (
+        <h3>
+          <span role="img" aria-label="shocked">
+            😱
+          </span>
+          You haven't added anything to your cart yet!
+        </h3>
+      )}
+    </div>
+*/
 
 @Component({
   selector: 'app-cart',
   template: `
-    <p>
-      cart works!
-    </p>
+    <div className="cart">
+      <div className="close" >
+        [close]
+      </div> 
+      <h2>Shopping Cart</h2>
+      <div *ngIf="cart.length !== 0; else elseBlock" className="flex-row">
+      </div>
+        <ng-template #elseBlock>
+        <h3>
+          <span role="img" aria-label="shocked">
+            😱
+          </span>
+          You haven't added anything to your cart yet!
+        </h3>
+        </ng-template>
+    </div>
   `,
   styles: [
     `
@@ -89,9 +137,18 @@ import { Component } from '@angular/core';
 })
 export class CartComponent {
 
-  /*
-    will need to implement a global store to dispatch actions to it
+  cart: Cart[] = []
+  sum: number = 0;
 
-    
-  */
+
+  calculateTotal() {
+
+    this.sum = this.cart.reduce((acc, next) => {
+      if (this.cart.length !== 0) {
+        return acc + (next.products.price * next.purchaseQuantity)
+      } else {
+        return acc
+      }
+    }, 0)
+  }
 }

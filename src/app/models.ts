@@ -27,3 +27,9 @@ export interface User {
     password: string;
     orders: Order[]; 
 };
+
+// Cart is not used as a database model
+export interface Cart {
+    products: Product,
+    purchaseQuantity: number,
+}
