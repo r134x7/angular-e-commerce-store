@@ -141,7 +141,7 @@ export class CartComponent {
   sum: number = 0;
 
 
-  calculateTotal() {
+  calculateTotal(): void {
 
     this.sum = this.cart.reduce((acc, next) => {
       if (this.cart.length !== 0) {
@@ -151,4 +151,6 @@ export class CartComponent {
       }
     }, 0)
   }
+
+
 }
