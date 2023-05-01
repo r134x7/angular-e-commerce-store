@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
+import { CartService } from '../cart.service';
 import { Product } from '../models';
 
 /*
@@ -46,7 +47,7 @@ JSX reference
               <div>{{product.quantity}} in stock</div>
               <span>{{product.price}}</span>
             </div>
-          <!-- <button onClick={addToCart}>Add to cart</button> -->
+          <button (click)="addToCartClick(product)">Add to cart</button>
           </div>
         </div>
         <ng-template #elseBlock>
@@ -68,8 +69,8 @@ export class ProductListComponent {
   products: Product[] = [];
 
   // dependency injection site. Becomes a singleton instance of ProductsService.
-  constructor(private productsService: ProductsService) {
-    this.productsService.currentValue.subscribe(products => this.products = products);
+  constructor(private productsService: ProductsService, private cartService: CartService) {
+    // this.productsService.currentValue.subscribe(products => this.products = products);
   }
 
   // // rely on ngOnInit lifecycle hook to call getProducts
@@ -82,6 +83,11 @@ export class ProductListComponent {
     // this.productsService.getProducts()
       // .subscribe(products => this.products = products);
       this.productsService.currentValue.subscribe(products => this.products = products);
+  }
+
+  addToCartClick(product: Product): void {
+    // requiring a method that calls addToCart at product page description or home page
+    this.cartService.addToCart(product);
   }
 
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Cart } from '../models';
+import { CartService } from '../cart.service';
 
 /*
 JSX Reference
@@ -140,6 +141,7 @@ export class CartComponent {
   cart: Cart[] = []
   sum: number = 0;
 
+  constructor(private cartService: CartService) {}
 
   calculateTotal(): void {
 
@@ -152,5 +154,14 @@ export class CartComponent {
     }, 0)
   }
 
+  // does this make sense?...
+  // the source needs to be continually updated with the latest values...
+  getProducts(): void {
+      this.cartService.currentValue.subscribe(cart => this.cart = cart);
+  }
+
+  addToCart(): void {
+    // need add this to where the product component is...
+  }
 
 }

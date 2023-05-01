@@ -21,6 +21,10 @@ export class CartService {
   
   addToCart(product: Product): void {
     // requiring a method that calls addToCart at product page description or home page
+    // this.currentValue.subscribe(elem => this.source.next([{products: product, purchaseQuantity: 1}]))
+    this.source.next([{products: product, purchaseQuantity: 1}])
+    console.log(this.source);
+    
   }
 
   removeFromCart(product: Product): void {
