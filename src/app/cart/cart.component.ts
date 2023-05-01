@@ -1,7 +1,43 @@
 import { Component } from '@angular/core';
-import { Cart } from '../models';
+import { Cart, Product } from '../models';
 import { CartService } from '../cart.service';
 
+// put this back into html once you've confirmed signals work on version 16
+/*
+
+      <div *ngIf="cart.length !== 0; else elseBlock" className="flex-row">what </div>
+       <div *ngFor="let item of cart; trackBy: itemsTrack" className="flex-row">
+        <div>
+            <img
+              src="../../assets/{{item.products.image}}"
+              alt="{{item.products.name}}"
+            />
+          </div>
+          <div>
+            <div>{{item.products.name}}, {{item.products.price}}</div>
+            <div>
+              <span>Qty: {{item.purchaseQuantity}}</span>
+              <button (click)="addToCartClick(item.products)">+</button>
+              <span
+                role="img"
+                aria-label="trash"
+              >
+                🗑️
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <ng-template #elseBlock>
+        <h3>
+          <span role="img" aria-label="shocked">
+            😱
+          </span>
+          You haven't added anything to your cart yet!
+        </h3>
+        </ng-template>
+
+*/
 /*
 JSX Reference
     <div className="cart">
@@ -44,16 +80,13 @@ JSX Reference
         [close]
       </div> 
       <h2>Shopping Cart</h2>
-      <div *ngIf="cart.length !== 0; else elseBlock" className="flex-row">
-      </div>
-        <ng-template #elseBlock>
-        <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
-          You haven't added anything to your cart yet!
-        </h3>
-        </ng-template>
+
+
+          <div className="flex-row space-between">
+            <strong>Total: {{this.sum}}</strong>
+          </div>
+
+    
     </div>
   `,
   styles: [
@@ -152,16 +185,26 @@ export class CartComponent {
         return acc
       }
     }, 0)
+
+    console.log(this.sum);
+    
   }
 
   // does this make sense?...
   // the source needs to be continually updated with the latest values...
   getProducts(): void {
       this.cartService.currentValue.subscribe(cart => this.cart = cart);
+      console.log(this.cart);
+      console.log(this.cart.length);
+      
   }
 
-  addToCart(): void {
-    // need add this to where the product component is...
+  addToCartClick(product: Product): void {
+    this.cartService.addToCart(product);
+  }
+
+  itemsTrack(index: number, item: Cart) {
+    return item.products.id;
   }
 
 }
