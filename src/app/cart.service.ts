@@ -20,11 +20,20 @@ export class CartService {
   constructor() {}
   
   addToCart(product: Product): void {
-    // requiring a method that calls addToCart at product page description or home page
-    // this.currentValue.subscribe(elem => this.source.next([{products: product, purchaseQuantity: 1}]))
-    this.source.next([{products: product, purchaseQuantity: 1}])
-    console.log(this.source);
     
+    const indexCheck = (this.source.getValue().length === 0)
+      ? -1 
+      : this.source.getValue().findIndex(elem => elem.products.id === product.id) 
+    
+    const updateValues = (indexCheck === -1)
+      ? [ ...this.source.getValue(), { products: product, purchaseQuantity: 1} as Cart]  // ensures key names for object are affected by LSP
+      : this.source.getValue().map((elem, index) => {
+        return (index === indexCheck)
+          ? { products: elem.products, purchaseQuantity: elem.purchaseQuantity + 1 } as Cart // ensures key names are affected by LSP
+          : elem
+      })
+
+    this.source.next(updateValues)
   }
 
   removeFromCart(product: Product): void {
