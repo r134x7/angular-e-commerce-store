@@ -51,15 +51,15 @@ export class CategoryMenuComponent {
   }
 
   getCategories(): void {
-    this.categories = this.categoriesService.getCategories();
+    this.categoriesService.getCategories().subscribe(elem => this.categories = elem);
   }
 
   // need to add a click handle element that filters the items by category
   // does not have an option to show all categories when testing MERN stack version unless you refresh
   // I am actually supposed to filter products by category, not filter the categories, now to figure this out with Observables...
-  filterCategory(categoryId: number): void {
-    this.categories = this.categories.filter(elem => elem.id === categoryId)
-  }
+  // filterCategory(categoryId: number): void {
+  //   this.categories = this.categories.filter(elem => elem.id === categoryId)
+  // }
 
 
   categoryTrack(index: number, item: any) {

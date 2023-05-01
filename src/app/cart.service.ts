@@ -30,4 +30,8 @@ export class CartService {
   incrementQuantityUp(): void {
     // in cart there is a number input that increases quantity of the product you have added to cart...
   }
+
+  decrementQuantityDown(): void {
+    // may decide to add buttons to increment and decrement instead of doing it from the number input
+  }
 }
