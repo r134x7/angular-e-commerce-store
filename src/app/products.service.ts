@@ -15,6 +15,7 @@ export class ProductsService {
 
   // to act as a continous source of the original when filtering
   private obsSource = of(products);
+  private productSource = from(products);
   
   constructor() { }
 
@@ -25,6 +26,10 @@ export class ProductsService {
     // this.source.next(toFilter)
     // console.log(this.source.getValue());
     
+  }
+
+  getProduct(id: number): Observable<Product> {
+    return this.productSource.pipe(filter(elem => elem.id === id))
   }
 
 }
