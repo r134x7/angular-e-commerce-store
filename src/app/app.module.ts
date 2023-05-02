@@ -14,6 +14,7 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SuccessComponent } from './success/success.component';
 import { CartItemsComponent } from './cart-items/cart-items.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CartItemsComponent } from './cart-items/cart-items.component';
     OrderHistoryComponent,
     SignUpComponent,
     SuccessComponent,
-    CartItemsComponent
+    CartItemsComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,

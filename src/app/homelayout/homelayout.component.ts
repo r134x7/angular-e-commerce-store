@@ -11,12 +11,6 @@ import { Component } from '@angular/core';
         </a>
       </h1>
     </header>
-
-    <div class="container">
-      <app-category-menu></app-category-menu>
-      <app-product-list></app-product-list>
-      <app-cart></app-cart>
-    </div>
   `,
   styles: [
   ]

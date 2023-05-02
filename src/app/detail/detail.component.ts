@@ -9,14 +9,8 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-detail',
   template: `
-    <header class="flex-row px-1">
-      <h1>
-        <a routerLink="/">
-          <span role="img" aria-label="shopping bag">🛍️</span>
-          Angular-RxJS-Shop
-        </a>
-      </h1>
-    </header>
+
+    <app-homelayout></app-homelayout>
 
         <div class="container my-1">
           <button type="button" (click)="goBack()">← Back to Products</button>
