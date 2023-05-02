@@ -9,7 +9,16 @@ import { Location } from '@angular/common';
 @Component({
   selector: 'app-detail',
   template: `
-        <div className="container my-1">
+    <header class="flex-row px-1">
+      <h1>
+        <a routerLink="/">
+          <span role="img" aria-label="shopping bag">🛍️</span>
+          Angular-RxJS-Shop
+        </a>
+      </h1>
+    </header>
+
+        <div class="container my-1">
           <button type="button" (click)="goBack()">← Back to Products</button>
 
           <div *ngIf="product !== undefined; else elseBlock">
@@ -38,6 +47,9 @@ import { Location } from '@angular/common';
           />
         </ng-template>
         </div>
+
+
+    <app-cart />
   `,
   styles: [
   ],

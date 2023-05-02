@@ -5,8 +5,8 @@ import { CartService } from '../cart.service';
 // put this back into html once you've confirmed signals work on version 16
 /*
 
-      <div *ngIf="cart.length !== 0; else elseBlock" className="flex-row">what </div>
-       <div *ngFor="let item of cart; trackBy: itemsTrack" className="flex-row">
+      <div *ngIf="cart.length !== 0; else elseBlock" class="flex-row">what </div>
+       <div *ngFor="let item of cart; trackBy: itemsTrack" class="flex-row">
         <div>
             <img
               src="../../assets/{{item.products.image}}"
@@ -40,8 +40,8 @@ import { CartService } from '../cart.service';
 */
 /*
 JSX Reference
-    <div className="cart">
-      <div className="close" onClick={toggleCart}>
+    <div class="cart">
+      <div class="close" onClick={toggleCart}>
         [close]
       </div>
       <h2>Shopping Cart</h2>
@@ -51,7 +51,7 @@ JSX Reference
             <CartItem key={item._id} item={item} />
           ))}
 
-          <div className="flex-row space-between">
+          <div class="flex-row space-between">
             <strong>Total: ${calculateTotal()}</strong>
 
             {Auth.loggedIn() ? (
@@ -75,14 +75,14 @@ JSX Reference
 @Component({
   selector: 'app-cart',
   template: `
-    <div className="cart">
-      <div className="close" >
+    <div class="cart">
+      <div class="close" >
         [close]
       </div> 
       <h2>Shopping Cart</h2>
 
 
-          <div className="flex-row space-between">
+          <div class="flex-row space-between">
             <strong>Total: {{this.sum}}</strong>
           </div>
 

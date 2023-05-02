@@ -6,7 +6,7 @@ import { CartComponent } from '../cart/cart.component';
 
 /*
 JSX reference
-    <div className="card px-1 py-1">
+    <div class="card px-1 py-1">
       <Link to={`/products/${_id}`}>
         <img
           alt={name}
@@ -30,11 +30,11 @@ JSX reference
 @Component({
   selector: 'app-product-list',
   template: `
-      <div className="my-2">
+      <div class="my-2">
       <h2>Our Products:</h2>
 
-        <div *ngIf="products.length !== 0; else elseBlock" className="flex-row">
-          <div *ngFor="let product of products" className="card px-1 py-1"> 
+        <div *ngIf="products.length !== 0; else elseBlock" class="flex-row">
+          <div *ngFor="let product of products" class="card px-1 py-1"> 
           <a 
             routerLink="/products/{{product.id}}" 
             >
