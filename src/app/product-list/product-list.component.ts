@@ -45,8 +45,8 @@ JSX reference
               <p>{{product.name}}</p>
             </a>
             <div>
-              <div>{{product.quantity}} in stock</div>
-              <span>{{product.price}}</span>
+              <div>{{product.quantity}} items in stock</div>
+              <span>{{"$"}}{{product.price}}</span>
             </div>
           <button (click)="addToCartClick(product)">Add to cart</button>
           </div>
