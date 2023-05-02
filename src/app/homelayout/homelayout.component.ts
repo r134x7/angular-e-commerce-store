@@ -3,20 +3,19 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-homelayout',
   template: `
-    <div className="container">
-    </div>
+    <header className="flex-row px-1">
+      <h1>
+        <a routerLink="/">
+          <span role="img" aria-label="shopping bag">🛍️</span>
+          Angular-RxJS-Shop
+        </a>
+      </h1>
+
+    </header>
   `,
   styles: [
   ]
 })
 export class HomelayoutComponent {
 
-  /*
-    infernal redux toolkit REACT component structure:
-    <div className="container">
-      <CategoryMenu />
-      <ProductList />
-      <Cart />
-    </div>
-  */
 }
