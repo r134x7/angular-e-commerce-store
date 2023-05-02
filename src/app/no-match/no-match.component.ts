@@ -3,9 +3,16 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-no-match',
   template: `
-    <p>
-      no-match works!
-    </p>
+
+    <app-homelayout></app-homelayout>
+    <div>
+      <h1>404 Page Not Found</h1>
+        <h1>
+          <span role="img" aria-label="Face With Rolling Eyes Emoji">
+            🙄
+          </span>
+        </h1>
+    </div>
   `,
   styles: [
   ]
