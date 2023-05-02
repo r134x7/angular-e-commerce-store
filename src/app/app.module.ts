@@ -13,6 +13,7 @@ import { NoMatchComponent } from './no-match/no-match.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { SuccessComponent } from './success/success.component';
+import { CartItemsComponent } from './cart-items/cart-items.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { SuccessComponent } from './success/success.component';
     NoMatchComponent,
     OrderHistoryComponent,
     SignUpComponent,
-    SuccessComponent
+    SuccessComponent,
+    CartItemsComponent
   ],
   imports: [
     BrowserModule,

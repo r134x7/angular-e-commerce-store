@@ -83,7 +83,7 @@ JSX Reference
 
 
           <div class="flex-row space-between">
-            <strong>Total: {{this.sum}}</strong>
+            <strong>Total: {{"$"}}{{this.sum}}</strong>
           </div>
 
     
