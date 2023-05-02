@@ -75,10 +75,10 @@ JSX Reference
 @Component({
   selector: 'app-cart',
   template: `
-    <div class="cart">
-      <div class="close" >
+    <div class="cart" *ngIf="cartOpen === true else elseBlock">
+      <div class="close" (click)="toggleCart()">
         [close]
-      </div> 
+    </div>
       <h2>Shopping Cart</h2>
 
 
@@ -87,7 +87,15 @@ JSX Reference
           </div>
 
     
-    </div>
+  </div> 
+
+      <ng-template #elseBlock>
+        <div class="cart-closed" (click)="toggleCart()">
+          <span role="img" aria-label="trash">
+            🛒
+          </span>
+        </div>
+      </ng-template>
   `,
   styles: [
     `
@@ -171,7 +179,8 @@ JSX Reference
 })
 export class CartComponent {
 
-  cart: Cart[] = []
+  cart: Cart[] = [];
+  cartOpen: boolean = false;
   sum: number = 0;
 
   constructor(private cartService: CartService) {}
@@ -205,6 +214,12 @@ export class CartComponent {
 
   itemsTrack(index: number, item: Cart) {
     return item.products.id;
+  }
+
+  toggleCart(): void {
+    this.cartOpen = !this.cartOpen;
+    console.log(this.cartOpen);
+    
   }
 
 }
