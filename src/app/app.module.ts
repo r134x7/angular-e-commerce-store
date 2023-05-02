@@ -15,6 +15,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { SuccessComponent } from './success/success.component';
 import { CartItemsComponent } from './cart-items/cart-items.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { OrderHistoryUserDetailComponent } from './order-history-user-detail/order-history-user-detail.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     SignUpComponent,
     SuccessComponent,
     CartItemsComponent,
-    HomePageComponent
+    HomePageComponent,
+    OrderHistoryUserDetailComponent
   ],
   imports: [
     BrowserModule,
