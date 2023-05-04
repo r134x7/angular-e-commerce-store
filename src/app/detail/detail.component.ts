@@ -5,6 +5,7 @@ import { ProductListComponent } from '../product-list/product-list.component';
 import { CartComponent } from '../cart/cart.component';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-detail',
@@ -24,6 +25,8 @@ import { Location } from '@angular/common';
             <strong>Price:</strong>{{product.price}}
             <button (click)="addToCart(product)">Add to Cart</button>
             <button
+              [disabled]="disabledButton(product)"
+              (click)="this.cartService.removeFromCart(product)"
             >
               Remove from Cart
             </button>
@@ -58,6 +61,7 @@ export class DetailComponent {
     private productListComponent: ProductListComponent,
     private route: ActivatedRoute,
     private location: Location,
+    public cartService: CartService
     ) {}
 
   ngOnInit(): void {
@@ -76,5 +80,11 @@ export class DetailComponent {
 
   goBack(): void {
     this.location.back();
+  }
+
+  disabledButton(product: Product): boolean {
+    return (this.cartService.indexCheck(product) === -1)
+      ? true
+      : false
   }
 }
