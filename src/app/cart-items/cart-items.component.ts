@@ -1,12 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, signal } from '@angular/core';
 import { Cart, Product } from '../models';
 import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-cart-items',
   template: `
-      <div *ngIf="cart.length !== 0; else elseBlock" class="flex-row">what </div>
-       <div *ngFor="let item of cart; trackBy: itemsTrack" class="flex-row">
+      <div *ngIf="cart().length !== 0; else elseBlock" class="flex-row">
+       <div *ngFor="let item of cart(); trackBy: itemsTrack" class="flex-row">
         <div>
             <img
               src="../../assets/{{item.products.image}}"
@@ -27,6 +27,7 @@ import { CartService } from '../cart.service';
             </div>
           </div>
         </div>
+      </div>
 
         <ng-template #elseBlock>
         <h3>
@@ -43,9 +44,12 @@ import { CartService } from '../cart.service';
 })
 export class CartItemsComponent {
 
-  @Input() cart: Cart[] = [];
+  // @Input() cart: Cart[] = [];
+  // cart = signal<Cart[]>([])
+  // cart = signal<Cart[]>(this.cartService.testTotal())
+  cart = this.cartService.testTotal;
 
-  constructor(private cartService: CartService) {}
+  constructor(public cartService: CartService) {}
 
   addToCartClick(product: Product): void {
     this.cartService.addToCart(product);
@@ -53,5 +57,16 @@ export class CartItemsComponent {
 
   itemsTrack(index: number, item: Cart) {
     return item.products.id;
+  }
+
+  getProducts(): void {
+      // this.cartService.currentValue.subscribe(cart => this.cart = cart);
+      // this.cartService.currentValue.subscribe(cart => {
+      //   console.log(cart);
+      //   this.cart.set(cart) 
+      // });
+      console.log(this.cart());
+      console.log(this.cart().length);
+      
   }
 }

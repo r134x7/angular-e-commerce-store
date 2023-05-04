@@ -3,6 +3,7 @@ import { toSignal } from "@angular/core/rxjs-interop"
 import { BehaviorSubject } from "rxjs";
 import { Cart } from "./models";
 import { Product } from './models';
+import type { Signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +52,7 @@ export class CartService {
     // may decide to add buttons to increment and decrement instead of doing it from the number input
   }
 
-  public calculateTotal(): number {
+  calculateTotal(): number {
     const total = Number(this.source.getValue().reduce((acc, next) => {
       if (this.source.getValue().length !== 0) {
         return acc + (next.products.price * next.purchaseQuantity)
@@ -70,4 +71,5 @@ export class CartService {
 
     return total
   }
+
 }

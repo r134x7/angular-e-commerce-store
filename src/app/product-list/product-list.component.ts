@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../products.service';
-import { CartService } from '../cart.service';
 import { Product } from '../models';
 import { CartComponent } from '../cart/cart.component';
+import { CartItemsComponent } from '../cart-items/cart-items.component';
 
 /*
 JSX reference
@@ -62,7 +62,7 @@ JSX reference
   `,
   styles: [
   ],
-  providers: [CartComponent]
+  providers: [CartComponent, CartItemsComponent]
 })
 export class ProductListComponent {
 
@@ -73,7 +73,9 @@ export class ProductListComponent {
   // dependency injection site. Becomes a singleton instance of ProductsService.
   constructor(private productsService: ProductsService, 
     // private cartService: CartService, 
-    private cartComponent: CartComponent) {
+    // private cartComponent: CartComponent,
+    private cartItemsComponent: CartItemsComponent
+    ) {
     // this.productsService.currentValue.subscribe(products => this.products = products);
   }
 
@@ -93,7 +95,8 @@ export class ProductListComponent {
     // requiring a method that calls addToCart at product page description or home page
     // this.cartService.addToCart(product);
     this.productsService.addToCart(product);
-    this.cartComponent.getProducts();
+    // this.cartComponent.getProducts();
+    this.cartItemsComponent.getProducts();
     // this.cartComponent.calculateTotal();
     // this.cartService.calculateTotal();
   }

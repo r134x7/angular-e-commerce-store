@@ -45,10 +45,10 @@ JSX Reference
     </div>
       <h2>Shopping Cart</h2>
       <!-- <button (click)="incrementCounter()">{{this.counter()}}</button> -->
-      <app-cart-items [cart]="this.cart()"></app-cart-items>
+      <!-- <app-cart-items [cart]="this.cart()"></app-cart-items> -->
+      <app-cart-items></app-cart-items>
 
           <div class="flex-row space-between">
-          <strong>Total: {{"$"}}{{this.sum()}}</strong>
             <strong>Total: {{"$"}}{{this.cartService.calculateTotal()}}</strong>
           </div>
 
@@ -145,11 +145,11 @@ JSX Reference
 })
 export class CartComponent {
 
-  cart = signal<Cart[]>([]);
+  // cart = signal<Cart[]>([]);
   // cart: Cart[] = [];
   cartOpen: boolean = false;
   // sum = signal(0);
-  sum = signal(this.cartService.calculateTotal());
+  // sum = signal(this.cartService.calculateTotal());
   // sum = computed(() => this.cartService.calculateTotal())
 
   constructor(public cartService: CartService) {}
@@ -180,12 +180,15 @@ export class CartComponent {
 
   // does this make sense?...
   // the source needs to be continually updated with the latest values...
-  getProducts(): void {
-      this.cartService.currentValue.subscribe(cart => this.cart.set(cart));
-      console.log(this.cart());
-      console.log(this.cart().length);
+  // getProducts(): void {
+  //     // this.cartService.currentValue.subscribe(cart => this.cart.set(cart));
+  //     // console.log(this.cart());
+  //     // console.log(this.cart().length);
       
-  }
+  //     this.cartService.currentValue.subscribe(cart => this.cart = cart);
+  //     console.log(this.cart);
+  //     console.log(this.cart.length);
+  // }
 
   toggleCart(): void {
     this.cartOpen = !this.cartOpen;
@@ -195,9 +198,9 @@ export class CartComponent {
   //   this.counter.update(value => value + 1);
   // }
 
-  update(): void {
-    this.sum.set(this.cartService.calculateTotal())
-  }
+  // update(): void {
+  //   this.sum.set(this.cartService.calculateTotal())
+  // }
 
   /*
   create a signal:
