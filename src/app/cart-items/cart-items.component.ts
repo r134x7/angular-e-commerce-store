@@ -23,6 +23,7 @@ import type { Signal } from "@angular/core";
               <span
                 role="img"
                 aria-label="trash"
+                (click)="removeFromCartClick(item.products)"
               >
                 🗑️
               </span>
@@ -55,6 +56,10 @@ export class CartItemsComponent {
   }
 
   subtractFromCartClick(product: Product): void {
+    this.cartService.decrementItemFromCart(product);
+  }
+
+  removeFromCartClick(product: Product): void {
     this.cartService.removeFromCart(product);
   }
 

@@ -36,7 +36,7 @@ export class CartService {
     this.source.next(updateValues)
   }
 
-  removeFromCart(product: Product): void {
+  decrementItemFromCart(product: Product): void {
     // method to remove an item from product description page or cart menu
     const indexCheck = this.indexCheck(product);
 
@@ -51,12 +51,13 @@ export class CartService {
       this.source.next(updateValue)
   }
 
-  incrementQuantityUp(): void {
-    // in cart there is a number input that increases quantity of the product you have added to cart...
-  }
+  removeFromCart(product: Product): void {
 
-  decrementQuantityDown(): void {
-    // may decide to add buttons to increment and decrement instead of doing it from the number input
+    const indexCheck = this.indexCheck(product);
+
+    const updateValue = this.source.getValue().filter((elem, index) => index !== indexCheck);
+
+    this.source.next(updateValue)
   }
 
   calculateTotal(): number {
