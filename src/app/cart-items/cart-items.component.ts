@@ -7,7 +7,7 @@ import type { Signal } from "@angular/core";
   selector: 'app-cart-items',
   template: `
       <div *ngIf="cart().length !== 0; else elseBlock" class="flex-row">
-       <div *ngFor="let item of cart(); trackBy: itemsTrack" class="flex-row">
+       <div *ngFor="let item of cart(); trackBy: itemsTrack" class="flex-row cart">
         <div>
             <img
               src="../../assets/{{item.products.image}}"
@@ -15,7 +15,7 @@ import type { Signal } from "@angular/core";
             />
           </div>
           <div>
-            <div>{{item.products.name}}, {{item.products.price}}</div>
+            <div>{{item.products.name}}, {{"$"}}{{item.products.price}}</div>
             <div>
               <button (click)="subtractFromCartClick(item.products)">-</button>
               <span>Qty: {{item.purchaseQuantity}}</span>
@@ -32,7 +32,7 @@ import type { Signal } from "@angular/core";
         </div>
       </div>
 
-        <ng-template #elseBlock>
+        <ng-template class="cart" #elseBlock>
         <h3>
           <span role="img" aria-label="shocked">
             😱
@@ -42,6 +42,12 @@ import type { Signal } from "@angular/core";
         </ng-template>
   `,
   styles: [
+    `
+    .cart img {
+      width: 70px;
+      margin-right: 1rem;
+    }
+  `
   ],
   providers: []
 })
