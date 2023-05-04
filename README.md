@@ -23,7 +23,7 @@
 
   ## Deployed App
 
-
+    Link to deployed app on Vercel: [https://angular-e-commerce-store-omega.vercel.app/](https://angular-e-commerce-store-omega.vercel.app/)
 
   ## Questions
   
