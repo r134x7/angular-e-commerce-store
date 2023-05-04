@@ -2,40 +2,6 @@ import { Component, computed, signal, Input, effect } from '@angular/core';
 import { Cart } from '../models';
 import { CartService } from '../cart.service';
 
-/*
-JSX Reference
-    <div class="cart">
-      <div class="close" onClick={toggleCart}>
-        [close]
-      </div>
-      <h2>Shopping Cart</h2>
-      {state.cart.length ? (
-        <div>
-          {state.cart.map((item) => (
-            <CartItem key={item._id} item={item} />
-          ))}
-
-          <div class="flex-row space-between">
-            <strong>Total: ${calculateTotal()}</strong>
-
-            {Auth.loggedIn() ? (
-              <button onClick={submitCheckout}>Checkout</button>
-            ) : (
-              <span>(log in to check out)</span>
-            )}
-          </div>
-        </div>
-      ) : (
-        <h3>
-          <span role="img" aria-label="shocked">
-            😱
-          </span>
-          You haven't added anything to your cart yet!
-        </h3>
-      )}
-    </div>
-*/
-
 @Component({
   selector: 'app-cart',
   template: `
@@ -44,15 +10,12 @@ JSX Reference
         [close]
     </div>
       <h2>Shopping Cart</h2>
-      <!-- <button (click)="incrementCounter()">{{this.counter()}}</button> -->
-      <!-- <app-cart-items [cart]="this.cart()"></app-cart-items> -->
+
       <app-cart-items></app-cart-items>
 
           <div class="flex-row space-between">
             <strong>Total: {{"$"}}{{this.cartService.calculateTotal()}}</strong>
           </div>
-
-    
   </div> 
 
       <ng-template #elseBlock>
@@ -145,72 +108,11 @@ JSX Reference
 })
 export class CartComponent {
 
-  // cart = signal<Cart[]>([]);
-  // cart: Cart[] = [];
   cartOpen: boolean = false;
-  // sum = signal(0);
-  // sum = signal(this.cartService.calculateTotal());
-  // sum = computed(() => this.cartService.calculateTotal())
 
   constructor(public cartService: CartService) {}
-
-  // calculateTotal(): void {
-
-    // this.sum = Number(this.cart.reduce((acc, next) => {
-    //   if (this.cart.length !== 0) {
-    //     return acc + (next.products.price * next.purchaseQuantity)
-    //   } else {
-    //     return acc
-    //   }
-    // }, 0).toFixed(2));
-
-    // let x = Number(this.cart().reduce((acc, next) => {
-    //   if (this.cart.length !== 0) {
-    //     return acc + (next.products.price * next.purchaseQuantity)
-    //   } else {
-    //     return acc
-    //   }
-    // }, 0).toFixed(2));
-
-
-    // console.log(this.sum());
-  //   this.sum.set(this.cartService.calculateTotal());
-    
-  // }
-
-  // does this make sense?...
-  // the source needs to be continually updated with the latest values...
-  // getProducts(): void {
-  //     // this.cartService.currentValue.subscribe(cart => this.cart.set(cart));
-  //     // console.log(this.cart());
-  //     // console.log(this.cart().length);
-      
-  //     this.cartService.currentValue.subscribe(cart => this.cart = cart);
-  //     console.log(this.cart);
-  //     console.log(this.cart.length);
-  // }
 
   toggleCart(): void {
     this.cartOpen = !this.cartOpen;
   }
-
-  // incrementCounter(): void {
-  //   this.counter.update(value => value + 1);
-  // }
-
-  // update(): void {
-  //   this.sum.set(this.cartService.calculateTotal())
-  // }
-
-  /*
-  create a signal:
-  sum = signal(0);
-  
-  get signal value:
-  this.signal()
-
-  update signal value:
-  this.signal.set(args)
-  */
-
 }

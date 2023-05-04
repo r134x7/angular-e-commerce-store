@@ -1,6 +1,7 @@
-import { Component, Input, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { Cart, Product } from '../models';
 import { CartService } from '../cart.service';
+import type { Signal } from "@angular/core";
 
 @Component({
   selector: 'app-cart-items',
@@ -44,10 +45,7 @@ import { CartService } from '../cart.service';
 })
 export class CartItemsComponent {
 
-  // @Input() cart: Cart[] = [];
-  // cart = signal<Cart[]>([])
-  // cart = signal<Cart[]>(this.cartService.testTotal())
-  cart = this.cartService.testTotal;
+  cart: Signal<Cart[]> = this.cartService.cartItems;
 
   constructor(public cartService: CartService) {}
 
@@ -59,14 +57,4 @@ export class CartItemsComponent {
     return item.products.id;
   }
 
-  getProducts(): void {
-      // this.cartService.currentValue.subscribe(cart => this.cart = cart);
-      // this.cartService.currentValue.subscribe(cart => {
-      //   console.log(cart);
-      //   this.cart.set(cart) 
-      // });
-      console.log(this.cart());
-      console.log(this.cart().length);
-      
-  }
 }

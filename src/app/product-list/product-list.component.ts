@@ -4,29 +4,6 @@ import { Product } from '../models';
 import { CartComponent } from '../cart/cart.component';
 import { CartItemsComponent } from '../cart-items/cart-items.component';
 
-/*
-JSX reference
-    <div class="card px-1 py-1">
-      <Link to={`/products/${_id}`}>
-        <img
-          alt={name}
-          src={`/images/${image}`}
-        />
-        <p>{name}</p>
-      </Link>
-      <div>
-        <div>{quantity} {pluralize("item", quantity)} in stock</div>
-        <span>${price}</span>
-      </div>
-      <button onClick={addToCart}>Add to cart</button>
-    </div>
-
-    // this won't work yet:
-                <a 
-            routerLink="/products/{{product.id}}" 
-            >
-*/
-
 @Component({
   selector: 'app-product-list',
   template: `
@@ -66,39 +43,20 @@ JSX reference
 })
 export class ProductListComponent {
 
-  // product list needs to be displayed by calling obsevables
-  // start with empty products to fill
   products: Product[] = [];
 
-  // dependency injection site. Becomes a singleton instance of ProductsService.
-  constructor(private productsService: ProductsService, 
-    // private cartService: CartService, 
-    // private cartComponent: CartComponent,
-    private cartItemsComponent: CartItemsComponent
-    ) {
-    // this.productsService.currentValue.subscribe(products => this.products = products);
-  }
+  constructor(private productsService: ProductsService) {}
 
-  // // rely on ngOnInit lifecycle hook to call getProducts
   ngOnInit(): void {
     this.getProducts();
   }
 
-  // // implement method to call products from mock
   getProducts(): void {
-    // this.productsService.getProducts()
-      // .subscribe(products => this.products = products);
       this.productsService.currentValue.subscribe(products => this.products = products);
   }
 
   addToCartClick(product: Product): void {
-    // requiring a method that calls addToCart at product page description or home page
-    // this.cartService.addToCart(product);
     this.productsService.addToCart(product);
-    // this.cartComponent.getProducts();
-    this.cartItemsComponent.getProducts();
-    // this.cartComponent.calculateTotal();
-    // this.cartService.calculateTotal();
   }
 
 }

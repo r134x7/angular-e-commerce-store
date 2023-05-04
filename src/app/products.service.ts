@@ -21,19 +21,14 @@ export class ProductsService {
   constructor(private cartService: CartService) { }
 
   filterProducts(id: number) {
-
     this.obsSource.pipe(map(elem => elem.filter(value => value.category.id === id))).subscribe(elem => this.source.next(elem))
-    // const toFilter = products.filter(elem => elem.category.id === id);
-    // this.source.next(toFilter)
-    // console.log(this.source.getValue());
-    
   }
 
   getProduct(id: number): Observable<Product> {
     return this.productSource.pipe(filter(elem => elem.id === id))
   }
 
-  // this might be a better way of using services through other services inside components
+  // this might be a better way of using services through other services so many components call from the same thing. 
   addToCart(product: Product) {
     this.cartService.addToCart(product);
   }

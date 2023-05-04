@@ -3,23 +3,15 @@ import { toSignal } from "@angular/core/rxjs-interop"
 import { BehaviorSubject } from "rxjs";
 import { Cart } from "./models";
 import { Product } from './models';
-import type { Signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
 
-  /*
-  will need behaviour subject to store cart items here
-  because add to cart and remove from cart buttons occur outside the cart component
-  
-  */ 
-
   private source = new BehaviorSubject<Cart[]>([]);
   currentValue = this.source.asObservable();
-
-  testTotal = toSignal(this.source, {requireSync: true})
+  cartItems = toSignal(this.source, {requireSync: true})
 
   constructor() {}
   
@@ -60,14 +52,6 @@ export class CartService {
         return acc
       }
     }, 0).toFixed(2));
-
-    // const total = Number(this.testTotal().reduce((acc, next) => {
-    //   if (this.testTotal().length !== 0) {
-    //     return acc + (next.products.price * next.purchaseQuantity)
-    //   } else {
-    //     return acc
-    //   }
-    // }, 0).toFixed(2));
 
     return total
   }
