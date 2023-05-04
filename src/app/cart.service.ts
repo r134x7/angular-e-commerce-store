@@ -52,21 +52,21 @@ export class CartService {
   }
 
   public calculateTotal(): number {
-    // const total = Number(this.source.getValue().reduce((acc, next) => {
-    //   if (this.source.getValue().length !== 0) {
-    //     return acc + (next.products.price * next.purchaseQuantity)
-    //   } else {
-    //     return acc
-    //   }
-    // }, 0).toFixed(2));
-
-    const total = Number(this.testTotal().reduce((acc, next) => {
-      if (this.testTotal().length !== 0) {
+    const total = Number(this.source.getValue().reduce((acc, next) => {
+      if (this.source.getValue().length !== 0) {
         return acc + (next.products.price * next.purchaseQuantity)
       } else {
         return acc
       }
     }, 0).toFixed(2));
+
+    // const total = Number(this.testTotal().reduce((acc, next) => {
+    //   if (this.testTotal().length !== 0) {
+    //     return acc + (next.products.price * next.purchaseQuantity)
+    //   } else {
+    //     return acc
+    //   }
+    // }, 0).toFixed(2));
 
     return total
   }
