@@ -1,27 +1,32 @@
-# AngularECommerceStore
+# Angular-E-Commerce-Store
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.5.
+  ## Description
 
-## Development server
+  Using the [Infernal Redux Toolkit Shop](https://github.com/r134x7/infernal-redux-toolkit-shop) which was a MERN stack app using Redux Toolkit as the base of this project. I started a blank Angular v15 project (and then upgraded to Angular v16) and went to make a front-end only version of the above app that imitates the MERN stack version as closely as possible. The biggest difference between the two apps is that this runs on Angular v16 and uses RxJS observables and behaviorSubjects to handle the same job that the Redux Toolkit state management did except the RxJS applied here did not use state management. The only instance of the use of the new Angular Signals that occured was the RxJS interop package to provide "toSignal" which allowed the behaviorSubject's source value to be detected in the view.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+  ## Table of Contents
+  
+  - [Installation](#installation)
+  - [Usage](#usage)
+  
+  - [Deployed App](#deployed-app)
+  - [Tests](#tests)
+  - [Questions](#questions)
 
-## Code scaffolding
+  ## Installation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+    - Use NPM to install @angular/cli at version 16 or later
 
-## Build
+  ## Usage
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+  To be completed.
 
-## Running unit tests
+  ## Deployed App
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  ## Questions
+  
+  You can find my GitHub profile at: https://github.com/r134x7
 
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  If you have any questions, you can contact me by email: r134x7@gmx.com
