@@ -71,7 +71,9 @@ export class ProductListComponent {
   products: Product[] = [];
 
   // dependency injection site. Becomes a singleton instance of ProductsService.
-  constructor(private productsService: ProductsService, private cartService: CartService, private cartComponent: CartComponent) {
+  constructor(private productsService: ProductsService, 
+    // private cartService: CartService, 
+    private cartComponent: CartComponent) {
     // this.productsService.currentValue.subscribe(products => this.products = products);
   }
 
@@ -89,7 +91,8 @@ export class ProductListComponent {
 
   addToCartClick(product: Product): void {
     // requiring a method that calls addToCart at product page description or home page
-    this.cartService.addToCart(product);
+    // this.cartService.addToCart(product);
+    this.productsService.addToCart(product);
     this.cartComponent.getProducts();
     // this.cartComponent.calculateTotal();
     // this.cartService.calculateTotal();

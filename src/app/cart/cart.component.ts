@@ -44,7 +44,7 @@ JSX Reference
         [close]
     </div>
       <h2>Shopping Cart</h2>
-      <button (click)="incrementCounter()">{{this.counter()}}</button>
+      <!-- <button (click)="incrementCounter()">{{this.counter()}}</button> -->
       <app-cart-items [cart]="this.cart()"></app-cart-items>
 
           <div class="flex-row space-between">
@@ -148,21 +148,11 @@ export class CartComponent {
   cart = signal<Cart[]>([]);
   // cart: Cart[] = [];
   cartOpen: boolean = false;
-  // @Input() sum = signal(0);
+  // sum = signal(0);
   sum = signal(this.cartService.calculateTotal());
-  // sum = computed(() => Number(this.cart().reduce((acc, next) => {
-  //   if (this.cart.length !== 0) {
-  //     return acc + (next.products.price * next.purchaseQuantity)
-  //   } else {
-  //     return acc
-  //   }
-  // }, 0).toFixed(2)))
-  counter = signal(0);
-  // sum = signal(0)
+  // sum = computed(() => this.cartService.calculateTotal())
 
-  constructor(public cartService: CartService) {
-    this.cartService = this.cartService;
-  }
+  constructor(public cartService: CartService) {}
 
   // calculateTotal(): void {
 
@@ -201,8 +191,12 @@ export class CartComponent {
     this.cartOpen = !this.cartOpen;
   }
 
-  incrementCounter(): void {
-    this.counter.update(value => value + 1);
+  // incrementCounter(): void {
+  //   this.counter.update(value => value + 1);
+  // }
+
+  update(): void {
+    this.sum.set(this.cartService.calculateTotal())
   }
 
   /*

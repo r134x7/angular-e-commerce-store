@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { products } from './mock-product';
 import { Product } from './models';
 import { Observable, from, of, map, filter, BehaviorSubject, tap } from "rxjs";
+import { CartService } from './cart.service';
 
 // provided in the root level of the app
 @Injectable({
@@ -17,7 +18,7 @@ export class ProductsService {
   private obsSource = of(products);
   private productSource = from(products);
   
-  constructor() { }
+  constructor(private cartService: CartService) { }
 
   filterProducts(id: number) {
 
@@ -32,4 +33,8 @@ export class ProductsService {
     return this.productSource.pipe(filter(elem => elem.id === id))
   }
 
+  // this might be a better way of using services through other services inside components
+  addToCart(product: Product) {
+    this.cartService.addToCart(product);
+  }
 }
