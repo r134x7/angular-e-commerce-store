@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { toSignal } from "@angular/core/rxjs-interop"
 import { BehaviorSubject } from "rxjs";
 import { Cart } from "./models";
 import { Product } from './models';
@@ -16,6 +17,8 @@ export class CartService {
 
   private source = new BehaviorSubject<Cart[]>([]);
   currentValue = this.source.asObservable();
+
+  testTotal = toSignal(this.source, {requireSync: true})
 
   constructor() {}
   
@@ -46,5 +49,25 @@ export class CartService {
 
   decrementQuantityDown(): void {
     // may decide to add buttons to increment and decrement instead of doing it from the number input
+  }
+
+  public calculateTotal(): number {
+    // const total = Number(this.source.getValue().reduce((acc, next) => {
+    //   if (this.source.getValue().length !== 0) {
+    //     return acc + (next.products.price * next.purchaseQuantity)
+    //   } else {
+    //     return acc
+    //   }
+    // }, 0).toFixed(2));
+
+    const total = Number(this.testTotal().reduce((acc, next) => {
+      if (this.testTotal().length !== 0) {
+        return acc + (next.products.price * next.purchaseQuantity)
+      } else {
+        return acc
+      }
+    }, 0).toFixed(2));
+
+    return total
   }
 }

@@ -91,7 +91,8 @@ export class ProductListComponent {
     // requiring a method that calls addToCart at product page description or home page
     this.cartService.addToCart(product);
     this.cartComponent.getProducts();
-    this.cartComponent.calculateTotal();
+    // this.cartComponent.calculateTotal();
+    // this.cartService.calculateTotal();
   }
 
 }

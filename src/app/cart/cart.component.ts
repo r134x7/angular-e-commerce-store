@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, signal, Input, effect } from '@angular/core';
 import { Cart } from '../models';
 import { CartService } from '../cart.service';
 
@@ -45,11 +45,11 @@ JSX Reference
     </div>
       <h2>Shopping Cart</h2>
       <button (click)="incrementCounter()">{{this.counter()}}</button>
-      <app-cart-items [cart]="cart"></app-cart-items>
+      <app-cart-items [cart]="this.cart()"></app-cart-items>
 
           <div class="flex-row space-between">
-            <strong>Total: {{"$"}}{{this.sum()}}</strong>
-            <strong>Total: {{"$"}}{{this.computedSum()}}</strong>
+          <strong>Total: {{"$"}}{{this.sum()}}</strong>
+            <strong>Total: {{"$"}}{{this.cartService.calculateTotal()}}</strong>
           </div>
 
     
@@ -145,17 +145,26 @@ JSX Reference
 })
 export class CartComponent {
 
-  // cart: Cart[] = signal<Cart[]>([]);
-  cart: Cart[] = [];
+  cart = signal<Cart[]>([]);
+  // cart: Cart[] = [];
   cartOpen: boolean = false;
-  sum = signal(0);
+  // @Input() sum = signal(0);
+  sum = signal(this.cartService.calculateTotal());
+  // sum = computed(() => Number(this.cart().reduce((acc, next) => {
+  //   if (this.cart.length !== 0) {
+  //     return acc + (next.products.price * next.purchaseQuantity)
+  //   } else {
+  //     return acc
+  //   }
+  // }, 0).toFixed(2)))
   counter = signal(0);
   // sum = signal(0)
-  computedSum = computed(() => this.calculateTotal())
 
-  constructor(private cartService: CartService) {}
+  constructor(public cartService: CartService) {
+    this.cartService = this.cartService;
+  }
 
-  calculateTotal(): void {
+  // calculateTotal(): void {
 
     // this.sum = Number(this.cart.reduce((acc, next) => {
     //   if (this.cart.length !== 0) {
@@ -165,24 +174,26 @@ export class CartComponent {
     //   }
     // }, 0).toFixed(2));
 
-    Number(this.cart.reduce((acc, next) => {
-      if (this.cart.length !== 0) {
-        return acc + (next.products.price * next.purchaseQuantity)
-      } else {
-        return acc
-      }
-    }, 0).toFixed(2));
+    // let x = Number(this.cart().reduce((acc, next) => {
+    //   if (this.cart.length !== 0) {
+    //     return acc + (next.products.price * next.purchaseQuantity)
+    //   } else {
+    //     return acc
+    //   }
+    // }, 0).toFixed(2));
 
-    // console.log(this.sum.toFixed(2));
+
+    // console.log(this.sum());
+  //   this.sum.set(this.cartService.calculateTotal());
     
-  }
+  // }
 
   // does this make sense?...
   // the source needs to be continually updated with the latest values...
   getProducts(): void {
-      this.cartService.currentValue.subscribe(cart => this.cart = cart);
-      console.log(this.cart);
-      console.log(this.cart.length);
+      this.cartService.currentValue.subscribe(cart => this.cart.set(cart));
+      console.log(this.cart());
+      console.log(this.cart().length);
       
   }
 
@@ -191,7 +202,7 @@ export class CartComponent {
   }
 
   incrementCounter(): void {
-    this.counter.set(this.counter() + 1)
+    this.counter.update(value => value + 1);
   }
 
   /*
