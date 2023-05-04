@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { Cart } from '../models';
 import { CartService } from '../cart.service';
 
@@ -44,11 +44,12 @@ JSX Reference
         [close]
     </div>
       <h2>Shopping Cart</h2>
-
+      <button (click)="incrementCounter()">{{this.counter()}}</button>
       <app-cart-items [cart]="cart"></app-cart-items>
 
           <div class="flex-row space-between">
-            <strong>Total: {{"$"}}{{this.sum}}</strong>
+            <strong>Total: {{"$"}}{{this.sum()}}</strong>
+            <strong>Total: {{"$"}}{{this.computedSum()}}</strong>
           </div>
 
     
@@ -144,15 +145,27 @@ JSX Reference
 })
 export class CartComponent {
 
+  // cart: Cart[] = signal<Cart[]>([]);
   cart: Cart[] = [];
   cartOpen: boolean = false;
-  sum: number = 0;
+  sum = signal(0);
+  counter = signal(0);
+  // sum = signal(0)
+  computedSum = computed(() => this.calculateTotal())
 
   constructor(private cartService: CartService) {}
 
   calculateTotal(): void {
 
-    this.sum = Number(this.cart.reduce((acc, next) => {
+    // this.sum = Number(this.cart.reduce((acc, next) => {
+    //   if (this.cart.length !== 0) {
+    //     return acc + (next.products.price * next.purchaseQuantity)
+    //   } else {
+    //     return acc
+    //   }
+    // }, 0).toFixed(2));
+
+    Number(this.cart.reduce((acc, next) => {
       if (this.cart.length !== 0) {
         return acc + (next.products.price * next.purchaseQuantity)
       } else {
@@ -160,7 +173,7 @@ export class CartComponent {
       }
     }, 0).toFixed(2));
 
-    console.log(this.sum.toFixed(2));
+    // console.log(this.sum.toFixed(2));
     
   }
 
@@ -176,5 +189,20 @@ export class CartComponent {
   toggleCart(): void {
     this.cartOpen = !this.cartOpen;
   }
+
+  incrementCounter(): void {
+    this.counter.set(this.counter() + 1)
+  }
+
+  /*
+  create a signal:
+  sum = signal(0);
+  
+  get signal value:
+  this.signal()
+
+  update signal value:
+  this.signal.set(args)
+  */
 
 }
