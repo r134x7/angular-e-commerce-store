@@ -14,12 +14,16 @@ export class CartService {
   cartItems = toSignal(this.source, {requireSync: true})
 
   constructor() {}
+
+  indexCheck(product: Product): number {
+    return (this.source.getValue().length === 0)
+      ? -1 
+      : this.source.getValue().findIndex(elem => elem.products.id === product.id) 
+  }
   
   addToCart(product: Product): void {
     
-    const indexCheck = (this.source.getValue().length === 0)
-      ? -1 
-      : this.source.getValue().findIndex(elem => elem.products.id === product.id) 
+    const indexCheck = this.indexCheck(product);
     
     const updateValues = (indexCheck === -1)
       ? [ ...this.source.getValue(), { products: product, purchaseQuantity: 1} as Cart]  // ensures key names for object are affected by LSP
@@ -34,6 +38,17 @@ export class CartService {
 
   removeFromCart(product: Product): void {
     // method to remove an item from product description page or cart menu
+    const indexCheck = this.indexCheck(product);
+
+    const updateValue = (this.source.getValue()[indexCheck].purchaseQuantity === 1)
+      ? this.source.getValue().filter((elem, index) => index !== indexCheck)
+      : this.source.getValue().map((elem, index) => {
+        return (index === indexCheck)
+          ? { products: elem.products, purchaseQuantity: elem.purchaseQuantity - 1 } as Cart // ensures key names are affected by LSP
+          : elem
+      })
+
+      this.source.next(updateValue)
   }
 
   incrementQuantityUp(): void {

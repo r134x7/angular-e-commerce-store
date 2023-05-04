@@ -17,6 +17,7 @@ import type { Signal } from "@angular/core";
           <div>
             <div>{{item.products.name}}, {{item.products.price}}</div>
             <div>
+              <button (click)="subtractFromCartClick(item.products)">-</button>
               <span>Qty: {{item.purchaseQuantity}}</span>
               <button (click)="addToCartClick(item.products)">+</button>
               <span
@@ -51,6 +52,10 @@ export class CartItemsComponent {
 
   addToCartClick(product: Product): void {
     this.cartService.addToCart(product);
+  }
+
+  subtractFromCartClick(product: Product): void {
+    this.cartService.removeFromCart(product);
   }
 
   itemsTrack(index: number, item: Cart) {
