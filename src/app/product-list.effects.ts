@@ -5,8 +5,6 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { ProductsService } from './products.service';
 import { CategoriesService } from './categories.service';
 
-// may have to create a method in products.service to get all products
-
 @Injectable()
 export class ProductListEffects {
 

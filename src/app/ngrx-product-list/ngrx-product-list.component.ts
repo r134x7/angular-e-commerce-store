@@ -44,6 +44,7 @@ export class NgrxProductListComponent implements OnInit {
 
   products$: Observable<Product[]>;
   
+  // The store's type is an object that must use the key name used in StoreModule.forRoot
   constructor(private store: Store<{ product: FeatureState }>) {
     this.products$ = this.store.select('product').pipe(select(state => state.products))
   }
