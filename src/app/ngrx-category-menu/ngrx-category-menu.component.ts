@@ -5,6 +5,7 @@ import { FeatureState } from '../product-list.reducer';
 import { Store, select } from '@ngrx/store';
 import * as CategoryActions from "../product-list.actions"
 import { counterSelector } from '../selector';
+import type { ActionReducer, Action } from '@ngrx/store';
 
 @Component({
   selector: 'app-ngrx-category-menu',
@@ -30,8 +31,8 @@ export class NgrxCategoryMenuComponent implements OnInit {
   categories$: Observable<Category[]>;
   count$: Observable<number>
 
-  constructor(private store: Store<{ product: any }>) {
-    this.categories$ = store.select('product');
+  constructor(private store: Store<{ product: FeatureState }>) {
+    this.categories$ = store.select('product').pipe(select(state => state.categories));
     this.count$ = this.store.select('product').pipe(select(counterSelector))
     // this.categories$ = this.store.pipe(select(state => state.categories))
   }
