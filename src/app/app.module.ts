@@ -16,6 +16,7 @@ import { SuccessComponent } from './success/success.component';
 import { CartItemsComponent } from './cart-items/cart-items.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { OrderHistoryUserDetailComponent } from './order-history-user-detail/order-history-user-detail.component';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { OrderHistoryUserDetailComponent } from './order-history-user-detail/ord
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot({}, {})
   ],
   providers: [],
   bootstrap: [AppComponent]
