@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, delay } from 'rxjs';
 import { Product } from '../models';
-import { Store } from '@ngrx/store';
+import { Store, select } from '@ngrx/store';
 import { update } from '../product-list.actions';
 import { ProductsService } from '../products.service';
 import type { Category } from '../models';
+import { FeatureState } from '../product-list.reducer';
 
 @Component({
   selector: 'app-ngrx-product-list',
@@ -12,7 +13,7 @@ import type { Category } from '../models';
       <div class="my-2">
       <h2>Our Products:</h2>
 
-        <div *ngIf="(products$ | async)?.length !== 0; else elseBlock" class="flex-row">
+        <div *ngIf="products$ | async; else elseBlock" class="flex-row">
           <div *ngFor="let product of products$ | async" class="card px-1 py-1"> 
           <a 
             routerLink="/products/{{product.id}}" 
@@ -44,28 +45,21 @@ import type { Category } from '../models';
 })
 export class NgrxProductListComponent implements OnInit {
 
-  products$: Observable<Product[]> = this.store.select(state => {
-    console.log(state);
-    return state.products
-  });
-
-  constructor(private store: Store<{ products: Product[] }>) {
+  // products$: Observable<Product[]> = this.store.select(state => {
+  //   console.log(state);
+  //   return state.products
+  // });
+  // products$: Observable<Product[]> = this.store.select(state => state.products)
+  products$: Observable<Product[]>;
+  
+  constructor(private store: Store<FeatureState>) {
     // this.products$ = store.select('products');
+    this.products$ = this.store.select('products');
   }
 
   ngOnInit(): void {
+    console.log(this.store.select('products'));
+    console.log(this.products$);
     this.store.dispatch({ type: '[Product-List Component] Get All' });
-    // this.store.dispatch(update({
-    //   payload: [{
-    //   id: 1,
-    //   name: 'Tin of Cookies',
-    //   description:
-    //     'Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
-    //   image: 'cookie-tin.jpg',
-    //   category: { id: 0, name: "test"},
-    //   price: 2.99,
-    //   quantity: 500
-    // }]
-    // }));
   }
 }

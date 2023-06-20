@@ -2,8 +2,12 @@ import { createReducer, on } from "@ngrx/store";
 import type { Product } from "./models";
 import { update } from "./product-list.actions";
 
-export const initialState = {
-    products: [] as Product[],
+export interface FeatureState {
+    products: Product[]
+}
+
+export const initialState: FeatureState = {
+    products: [], 
 }
 
 export const productsReducer = createReducer(

@@ -49,7 +49,8 @@ import { productsReducer } from './product-list.reducer';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ product: productsReducer }, {}),
+    // StoreModule.forRoot({ product: productsReducer }, {}),
+    StoreModule.forRoot({ product: productsReducer }),
     EffectsModule.forRoot([ProductListEffects])
   ],
   providers: [],
