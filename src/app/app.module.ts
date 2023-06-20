@@ -17,6 +17,7 @@ import { CartItemsComponent } from './cart-items/cart-items.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { OrderHistoryUserDetailComponent } from './order-history-user-detail/order-history-user-detail.component';
 import { StoreModule } from '@ngrx/store';
+import { NgrxHomePageComponent } from './ngrx-home-page/ngrx-home-page.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { StoreModule } from '@ngrx/store';
     SuccessComponent,
     CartItemsComponent,
     HomePageComponent,
-    OrderHistoryUserDetailComponent
+    OrderHistoryUserDetailComponent,
+    NgrxHomePageComponent
   ],
   imports: [
     BrowserModule,
