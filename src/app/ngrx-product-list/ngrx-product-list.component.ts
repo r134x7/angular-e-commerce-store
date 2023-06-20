@@ -54,7 +54,8 @@ export class NgrxProductListComponent implements OnInit {
   products$: Observable<Product[]>;
   
   constructor(private store: Store<FeatureState>) {
-    this.products$ = store.select('products');
+    // this.products$ = store.select('products');
+    this.products$ = store.pipe(select(state => state.products))
     // this.products$ = this.store.pipe(select(productSelector))
   }
 

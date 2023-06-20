@@ -3,6 +3,7 @@ import { Category } from '../models';
 import { Observable } from 'rxjs';
 import { FeatureState } from '../product-list.reducer';
 import { Store, select } from '@ngrx/store';
+import * as CategoryActions from "../product-list.actions"
 
 @Component({
   selector: 'app-ngrx-category-menu',
@@ -21,13 +22,15 @@ import { Store, select } from '@ngrx/store';
 })
 export class NgrxCategoryMenuComponent implements OnInit {
 
-  categories$: Observable<Category[]>;
+  categories$: Observable<Category[]> = this.store.pipe(select(state => state.categories));
 
   constructor(private store: Store<FeatureState>) {
-    this.categories$ = store.select('categories')
+    // this.categories$ = store.select('categories')
+    // this.categories$ = this.store.pipe(select(state => state.categories))
   }
 
   ngOnInit(): void {
       this.store.dispatch({ type: '[Product-List Component] Get Categories'})
+      // this.store.dispatch(CategoryActions.cartProductList())
   }
 }
