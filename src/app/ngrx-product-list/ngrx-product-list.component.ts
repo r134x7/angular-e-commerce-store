@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, delay } from 'rxjs';
 import { Product } from '../models';
 import { Store, select } from '@ngrx/store';
-import { updateProductList } from '../product-list.actions';
-import { ProductsService } from '../products.service';
-import type { Category } from '../models';
 import { FeatureState } from '../product-list.reducer';
-import { productSelector } from '../selector';
 
 @Component({
   selector: 'app-ngrx-product-list',
@@ -46,17 +42,10 @@ import { productSelector } from '../selector';
 })
 export class NgrxProductListComponent implements OnInit {
 
-  // products$: Observable<Product[]> = this.store.select(state => {
-  //   console.log(state);
-  //   return state.products
-  // });
-  // products$: Observable<Product[]> = this.store.select(state => state.products)
   products$: Observable<Product[]>;
   
-  constructor(private store: Store<FeatureState>) {
-    // this.products$ = store.select('products');
-    this.products$ = store.pipe(select(state => state.products))
-    // this.products$ = this.store.pipe(select(productSelector))
+  constructor(private store: Store<{ product: FeatureState }>) {
+    this.products$ = this.store.select('product').pipe(select(state => state.products))
   }
 
   ngOnInit(): void {
