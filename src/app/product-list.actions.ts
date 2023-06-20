@@ -1,3 +1,4 @@
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
+import { Product } from "./models";
 
-export const update = createAction('[Product-List Component] Update');
+export const update = createAction('[Product-List Component] Update', props<{ payload: Product[] }>);
