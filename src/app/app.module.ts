@@ -19,6 +19,8 @@ import { OrderHistoryUserDetailComponent } from './order-history-user-detail/ord
 import { StoreModule } from '@ngrx/store';
 import { NgrxHomePageComponent } from './ngrx-home-page/ngrx-home-page.component';
 import { NgrxHomeLayoutComponent } from './ngrx-home-layout/ngrx-home-layout.component';
+import { NgrxCategoryMenuComponent } from './ngrx-category-menu/ngrx-category-menu.component';
+import { NgrxProductListComponent } from './ngrx-product-list/ngrx-product-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { NgrxHomeLayoutComponent } from './ngrx-home-layout/ngrx-home-layout.com
     HomePageComponent,
     OrderHistoryUserDetailComponent,
     NgrxHomePageComponent,
-    NgrxHomeLayoutComponent
+    NgrxHomeLayoutComponent,
+    NgrxCategoryMenuComponent,
+    NgrxProductListComponent
   ],
   imports: [
     BrowserModule,
