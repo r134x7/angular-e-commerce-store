@@ -8,6 +8,7 @@ import { Component } from '@angular/core';
     <div class="container">
       <app-ngrx-category-menu></app-ngrx-category-menu>
       <app-ngrx-product-list></app-ngrx-product-list>
+      <app-ngrx-cart></app-ngrx-cart>
     </div>
   `,
   styles: [

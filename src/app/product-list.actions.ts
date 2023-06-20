@@ -11,6 +11,10 @@ export const categoryFilter = createAction(
     '[Product-List Component] Filter Category',
     props<{ payload: number }>());
 
+export const toggleCart = createAction(
+    '[Product-List Component] Toggle Cart',
+);
+
 export const increment = createAction(
     '[Counter Component] Increment'
 );
