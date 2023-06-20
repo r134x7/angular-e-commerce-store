@@ -18,6 +18,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { OrderHistoryUserDetailComponent } from './order-history-user-detail/order-history-user-detail.component';
 import { StoreModule } from '@ngrx/store';
 import { NgrxHomePageComponent } from './ngrx-home-page/ngrx-home-page.component';
+import { NgrxHomeLayoutComponent } from './ngrx-home-layout/ngrx-home-layout.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NgrxHomePageComponent } from './ngrx-home-page/ngrx-home-page.component
     CartItemsComponent,
     HomePageComponent,
     OrderHistoryUserDetailComponent,
-    NgrxHomePageComponent
+    NgrxHomePageComponent,
+    NgrxHomeLayoutComponent
   ],
   imports: [
     BrowserModule,

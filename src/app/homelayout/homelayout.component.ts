@@ -12,7 +12,6 @@ import { Component } from '@angular/core';
       </h1>
 
       <nav>
-
         <ul *ngIf="loggedIn else elseBlock" class="flex-row">
           <li class="mx-1">
             <a routerLink="/orderHistory">
@@ -22,6 +21,11 @@ import { Component } from '@angular/core';
           <li class="mx-1">
             <a routerLink="/">
               Logout
+            </a>
+          </li>
+          <li class="mx-1">
+            <a routerLink="/ngrx">
+              Go to NgRx Store 
             </a>
           </li>
         </ul>
@@ -36,6 +40,11 @@ import { Component } from '@angular/core';
           <li class="mx-1">
             <a routerLink="/login">
               Login
+            </a>
+          </li>
+          <li class="mx-1">
+            <a routerLink="/ngrx">
+              Go to NgRx Store 
             </a>
           </li>
         </ul>
