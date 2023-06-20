@@ -21,6 +21,7 @@ import { NgrxHomePageComponent } from './ngrx-home-page/ngrx-home-page.component
 import { NgrxHomeLayoutComponent } from './ngrx-home-layout/ngrx-home-layout.component';
 import { NgrxCategoryMenuComponent } from './ngrx-category-menu/ngrx-category-menu.component';
 import { NgrxProductListComponent } from './ngrx-product-list/ngrx-product-list.component';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NgrxProductListComponent } from './ngrx-product-list/ngrx-product-list.
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({}, {})
+    StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]

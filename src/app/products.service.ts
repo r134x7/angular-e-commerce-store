@@ -24,6 +24,11 @@ export class ProductsService {
     this.obsSource.pipe(map(elem => elem.filter(value => value.category.id === id))).subscribe(elem => this.source.next(elem))
   }
 
+  getAllProducts() {
+    const productsCall = of(products)
+    return productsCall
+  }
+
   getProduct(id: number): Observable<Product> {
     return this.productSource.pipe(filter(elem => elem.id === id))
   }

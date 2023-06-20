@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../models';
 import { Store } from '@ngrx/store';
 import { update } from '../product-list.actions';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-ngrx-product-list',
