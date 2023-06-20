@@ -35,6 +35,7 @@ export class NgrxCategoryMenuComponent implements OnInit {
   }
 
   filterProductsByCategory(categoryId: number): void {
+    this.store.dispatch({ type: '[Product-List Component] Get All' });
     this.store.dispatch(categoryFilter({ payload: categoryId }))
   }
 

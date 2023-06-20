@@ -36,7 +36,9 @@ export const productsReducer = createReducer(
     on(categoryFilter, (state, action) => {
         return {
             ...state,
-            currentCategory: action.payload
+            currentCategory: action.payload,
+            products: state.products
+                .filter(elem => elem.category.id === action.payload)
         }
     })
     // on(increment, (state, action) => {
