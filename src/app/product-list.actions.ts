@@ -6,3 +6,7 @@ export const updateProductList = createAction('[Product-List Component] Update',
 export const cartProductList = createAction(
     '[Product-List Component] Update Categories',
     props<{ payload: Category[]}>()); 
+
+export const increment = createAction(
+    '[Counter Component] Increment'
+);

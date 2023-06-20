@@ -6,3 +6,7 @@ export const productSelector = createSelector(
     selectFeature,
     (state) => state.products
 )
+export const counterSelector = createSelector(
+    selectFeature,
+    (state) => state.counter
+)

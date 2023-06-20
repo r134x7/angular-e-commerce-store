@@ -1,17 +1,19 @@
 import { createReducer, on } from "@ngrx/store";
 import type { Product, Category } from "./models";
-import { cartProductList, updateProductList } from "./product-list.actions";
+import { cartProductList, updateProductList, increment } from "./product-list.actions";
 
 export interface FeatureState {
     products: Product[]
     categories: Category[],
     currentCategory: string,
+    counter: number,
 }
 
 export const initialState: FeatureState = {
     products: [], 
     categories: [],
     currentCategory: "",
+    counter: 0,
 }
 
 export const productsReducer = createReducer(
@@ -34,6 +36,14 @@ export const productsReducer = createReducer(
         return {
             ...state,
             categories: [...action.payload]
+        }
+    }),
+    on(increment, (state, action) => {
+        console.log(state.counter);
+        
+        return {
+            ...state,
+            counter: state.counter + 1
         }
     }),
 );
