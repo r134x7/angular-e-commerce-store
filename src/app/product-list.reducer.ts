@@ -1,18 +1,22 @@
 import { createReducer, on } from "@ngrx/store";
-import type { Product } from "./models";
-import { update } from "./product-list.actions";
+import type { Product, Category } from "./models";
+import { cartProductList, updateProductList } from "./product-list.actions";
 
 export interface FeatureState {
     products: Product[]
+    categories: Category[],
+    currentCategory: string,
 }
 
 export const initialState: FeatureState = {
     products: [], 
+    categories: [],
+    currentCategory: "",
 }
 
 export const productsReducer = createReducer(
     initialState,
-    on(update, (state, action) => {
+    on(updateProductList, (state, action) => {
         console.log(state.products);
         
         console.log(action.payload);
@@ -20,6 +24,16 @@ export const productsReducer = createReducer(
         return {
             ...state,
             products: [...action.payload]
+        }
+    }),
+    on(cartProductList, (state, action) => {
+        console.log(state);
+        console.log(state.categories);
+        console.log(action.payload);
+        
+        return {
+            ...state,
+            categories: [...action.payload]
         }
     }),
 );

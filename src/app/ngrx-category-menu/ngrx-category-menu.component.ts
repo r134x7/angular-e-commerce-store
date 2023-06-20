@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Category } from '../models';
 import { Observable } from 'rxjs';
 import { FeatureState } from '../product-list.reducer';
@@ -19,11 +19,15 @@ import { Store, select } from '@ngrx/store';
   styles: [
   ]
 })
-export class NgrxCategoryMenuComponent {
+export class NgrxCategoryMenuComponent implements OnInit {
 
   categories$: Observable<Category[]>;
 
   constructor(private store: Store<FeatureState>) {
-    this.categories$ = store.select('products')
+    this.categories$ = store.select('categories')
+  }
+
+  ngOnInit(): void {
+      this.store.dispatch({ type: '[Product-List Component] Get Categories'})
   }
 }

@@ -3,6 +3,7 @@ import { map, exhaustMap, catchError} from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
 import { ProductsService } from './products.service';
+import { CategoriesService } from './categories.service';
 
 // may have to create a method in products.service to get all products
 
@@ -21,8 +22,22 @@ export class ProductListEffects {
         ))
     ))
 
+    loadCategories$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType('[Product-List Component] Get Categories'),
+        exhaustMap(() => this.categoriesService.getCategories().pipe(
+            map(elem => ({
+                type: '[Product-List Component] Update Categories',
+                payload: elem,
+            })),
+            catchError(() => EMPTY)
+        ))
+    )
+    )
+
     constructor(
         private actions$: Actions,
-        private productListService: ProductsService
+        private productListService: ProductsService,
+        private categoriesService: CategoriesService,
     ) {}
 }
