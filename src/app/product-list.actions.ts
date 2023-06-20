@@ -15,6 +15,25 @@ export const toggleCart = createAction(
     '[Product-List Component] Toggle Cart',
 );
 
+export const addToCart = createAction(
+    '[Product-List Component] Add To Cart',
+    props<{ payload: Product }>()
+)
+
+export const updateCartQuantity = createAction(
+    '[Product-List Component] Update Cart Quantity',
+    props<{ payload: Product }>()
+)
+
+export const removeFromCart = createAction(
+    '[Product-List Component] Remove From Cart',
+    props<{ payload: Product }>()
+)
+
+export const clearCart = createAction(
+    '[Product-List Component] Clear Cart',
+)
+
 export const increment = createAction(
     '[Counter Component] Increment'
 );

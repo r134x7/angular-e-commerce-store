@@ -3,9 +3,12 @@ import type { Product, Category, Cart } from "./models";
 import { 
     categoryMenuList, 
     updateProductList, 
-    increment,
     categoryFilter, 
     toggleCart,
+    addToCart,
+    clearCart,
+    removeFromCart,
+    updateCartQuantity,
 } from "./product-list.actions";
 
 export interface FeatureState {
@@ -51,13 +54,42 @@ export const productsReducer = createReducer(
             ...state,
             cartOpen: !state.cartOpen
         }
+    }),
+    on(addToCart, (state, action) => {
+        return {
+            ...state,
+            cartOpen: true,
+            cart: [...state.cart, { products: action.payload, purchaseQuantity: 1}],
+        }
+    }),
+    on(updateCartQuantity, (state, action) => {
+        return {
+            ...state,
+            cartOpen: true,
+            cart: state.cart.map((elem) => {
+                return (action.payload.id === elem.products.id)
+                    ? {
+                        ...elem,
+                        purchaseQuantity: elem.purchaseQuantity + 1 
+                    }
+                    : elem
+            })
+        }
+    }),
+    on(removeFromCart, (state, action) => {
+        let newState = state.cart.filter(elem => elem.products.id !== action.payload.id)
+        return {
+            ...state,
+            cartOpen: newState.length > 0,
+            cart: newState
+        }
+    }),
+    on(clearCart, (state, action) => {
+        return {
+            ...state,
+            cartOpen: false,
+            cart: [],
+        }
     })
-    // on(increment, (state, action) => {
-    //     console.log(state.counter);
-        
-    //     return {
-    //         ...state,
-    //         counter: state.counter + 1
-    //     }
-    // }),
+
 );
