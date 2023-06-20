@@ -11,7 +11,7 @@ export class ProductListEffects {
 
     loadProducts$ = createEffect(() => 
     this.actions$.pipe(
-        ofType('[Product-List Component] Update'),
+        ofType('[Product-List Component] Get All'),
         exhaustMap(() => this.productListService.getAllProducts().pipe(
             map(products => ({
                 type: '[Product-List Component] Update',

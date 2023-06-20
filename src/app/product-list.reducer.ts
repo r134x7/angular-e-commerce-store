@@ -9,9 +9,13 @@ export const initialState = {
 export const productsReducer = createReducer(
     initialState,
     on(update, (state, action) => {
+        console.log(state.products);
+        
+        console.log(action.payload);
+        
         return {
             ...state,
-            products: [...action._p.payload]
+            products: [...action.payload]
         }
     }),
 );
