@@ -6,6 +6,7 @@ import { update } from '../product-list.actions';
 import { ProductsService } from '../products.service';
 import type { Category } from '../models';
 import { FeatureState } from '../product-list.reducer';
+import { productSelector } from '../selector';
 
 @Component({
   selector: 'app-ngrx-product-list',
@@ -54,12 +55,10 @@ export class NgrxProductListComponent implements OnInit {
   
   constructor(private store: Store<FeatureState>) {
     // this.products$ = store.select('products');
-    this.products$ = this.store.select('products');
+    this.products$ = this.store.pipe(select(productSelector))
   }
 
   ngOnInit(): void {
-    console.log(this.store.select('products'));
-    console.log(this.products$);
     this.store.dispatch({ type: '[Product-List Component] Get All' });
   }
 }

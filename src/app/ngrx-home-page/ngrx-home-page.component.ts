@@ -6,6 +6,7 @@ import { Component } from '@angular/core';
     <app-ngrx-home-layout></app-ngrx-home-layout>
 
     <div class="container">
+      <app-ngrx-category-menu></app-ngrx-category-menu>
       <app-ngrx-product-list></app-ngrx-product-list>
     </div>
   `,
