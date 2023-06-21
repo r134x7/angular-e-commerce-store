@@ -3,7 +3,7 @@ import { Observable, delay } from 'rxjs';
 import { Product } from '../models';
 import { Store, select } from '@ngrx/store';
 import { FeatureState } from '../product-list.reducer';
-import { addToCart } from '../product-list.actions';
+import { addToCart, cartSum } from '../product-list.actions';
 
 @Component({
   selector: 'app-ngrx-product-list',
@@ -56,5 +56,6 @@ export class NgrxProductListComponent implements OnInit {
 
   addToCartClick(product: Product): void {
     this.store.dispatch(addToCart({ payload: product}))
+    this.store.dispatch(cartSum())
   }
 }

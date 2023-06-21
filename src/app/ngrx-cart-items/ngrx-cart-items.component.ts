@@ -3,12 +3,12 @@ import { Observable } from 'rxjs';
 import { Cart, Product } from '../models';
 import { FeatureState } from '../product-list.reducer';
 import { Store, select } from '@ngrx/store';
-import { addToCart, removeFromCart, decrementItemFromCart } from '../product-list.actions';
+import { addToCart, removeFromCart, decrementItemFromCart, cartSum } from '../product-list.actions';
 
 @Component({
   selector: 'app-ngrx-cart-items',
   template: `
-      <div *ngIf="cart$ | async; else elseBlock" class="flex-row">
+      <div *ngIf="(cart$ | async)?.length !== 0; else elseBlock" class="flex-row">
        <div *ngFor="let item of cart$ | async" class="flex-row cart">
         <div>
             <img
@@ -62,14 +62,17 @@ export class NgrxCartItemsComponent {
 
   addToCartClick(product: Product): void {
     this.store.dispatch(addToCart({ payload: product }))
+    this.store.dispatch(cartSum())
   }
 
   subtractFromCartClick(product: Product): void {
     this.store.dispatch(decrementItemFromCart({ payload: product }))
+    this.store.dispatch(cartSum())
   }
 
   removeFromCartClick(product: Product): void {
     this.store.dispatch(removeFromCart({ payload: product }))
+    this.store.dispatch(cartSum())
   }
  
 }

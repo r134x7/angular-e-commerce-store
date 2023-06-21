@@ -13,10 +13,10 @@ import { toggleCart } from '../product-list.actions';
     </div>
       <h2>Shopping Cart</h2>
 
-      <app-cart-items></app-cart-items>
+      <app-ngrx-cart-items></app-ngrx-cart-items>
 
           <div class="flex-row space-between">
-            <!-- <strong>Total: {{"$"}}{{this.cartService.calculateTotal()}}</strong> -->
+            <strong *ngIf="cartSum$ | async as cartSum">Total: {{"$"}}{{cartSum}}</strong>
           </div>
   </div> 
 
@@ -111,9 +111,11 @@ import { toggleCart } from '../product-list.actions';
 export class NgrxCartComponent {
 
   cartOpen$: Observable<boolean>;
+  cartSum$: Observable<number>;
 
   constructor(private store: Store<{ product: FeatureState }>) {
     this.cartOpen$ = this.store.select('product').pipe(select(state => state.cartOpen))
+    this.cartSum$ = this.store.select('product').pipe(select(state => state.cartSum))
   }
 
   toggleCartDispatch(): void {
