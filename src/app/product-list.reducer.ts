@@ -83,19 +83,13 @@ export const productsReducer = createReducer(
                     : elem
             })
         
-        console.log(updateValues);
-        
-
         return {
             ...state,
             cartOpen: true,
-            // cart: [...state.cart, { products: action.payload, purchaseQuantity: 1}],
             cart: updateValues
         }
     }),
     on(decrementItemFromCart, (state, action) => {
-
-        // let indexCheck = state.cart.findIndex(elem => elem.products.id === action.payload.id)
 
         const callIndexCheck = indexCheck(action.payload, state.cart) 
 
