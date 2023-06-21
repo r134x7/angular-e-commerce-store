@@ -25,8 +25,7 @@ import { indexCheck } from '../product-list.reducer';
             <strong>Price:</strong>{{product.price}}
             <button (click)="addToCart(product)">Add to Cart</button>
             <button 
-              *ngIf="disable$ | async as disable"
-              [disabled]="disable === -1"
+              [disabled]="disabledButton((disable$ | async) ?? -1)"
               (click)="removeFromCart(product)"
             >
               Remove from Cart
@@ -62,8 +61,16 @@ export class NgrxDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     ) {
-    this.product$ = this.store.select("product").pipe(select(state => state.products[this.getProduct()]))
-    this.disable$ = this.store.select("product").pipe(select(state => indexCheck(state.products[this.getProduct()], state.cart)))
+    this.product$ = this.store.select("product").pipe(select(state => {
+      let get = state.products.filter(elem => elem.id === this.getProduct())
+
+      return get[0]
+    }))
+    this.disable$ = this.store.select("product").pipe(select(state => {
+      let get = state.products.filter(elem => elem.id === this.getProduct())
+
+      return indexCheck(get[0], state.cart)
+    } ))
   }
 
   ngOnInit(): void {
@@ -86,5 +93,11 @@ export class NgrxDetailComponent implements OnInit {
 
   goBack(): void {
     this.location.back();
+  }
+
+  disabledButton(value: number): boolean {
+    return (value === -1)
+      ? true
+      : false
   }
 } 

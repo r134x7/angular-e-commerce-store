@@ -14,7 +14,7 @@ import { addToCart, cartSum } from '../product-list.actions';
         <div *ngIf="products$ | async; else elseBlock" class="flex-row">
           <div *ngFor="let product of products$ | async" class="card px-1 py-1"> 
           <a 
-            routerLink="/products/{{product.id}}" 
+            routerLink="products/{{product.id}}" 
             >
               <img
                 alt="{{product.name}}"
