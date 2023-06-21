@@ -25,6 +25,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ProductListEffects } from './product-list.effects';
 import { productsReducer } from './product-list.reducer';
 import { NgrxCartComponent } from './ngrx-cart/ngrx-cart.component';
+import { NgrxCartItemsComponent } from './ngrx-cart-items/ngrx-cart-items.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { NgrxCartComponent } from './ngrx-cart/ngrx-cart.component';
     NgrxHomeLayoutComponent,
     NgrxCategoryMenuComponent,
     NgrxProductListComponent,
-    NgrxCartComponent
+    NgrxCartComponent,
+    NgrxCartItemsComponent
   ],
   imports: [
     BrowserModule,

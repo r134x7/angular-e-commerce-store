@@ -8,7 +8,8 @@ import {
     addToCart,
     clearCart,
     removeFromCart,
-    updateCartQuantity,
+    decrementItemFromCart,
+    cartSum,
 } from "./product-list.actions";
 
 export interface FeatureState {
@@ -17,6 +18,7 @@ export interface FeatureState {
     currentCategory: number | undefined,
     cartOpen: boolean,
     cart: Cart[],
+    cartSum: number,
 }
 
 export const initialState: FeatureState = {
@@ -25,6 +27,14 @@ export const initialState: FeatureState = {
     currentCategory: undefined, 
     cartOpen: false,
     cart: [],
+    cartSum: 0,
+}
+
+// helper function
+function indexCheck(product: Product, cart: Cart[]) {
+    return (cart.length === 0)
+      ? -1 
+      : cart.findIndex(elem => elem.products.id === product.id) 
 }
 
 export const productsReducer = createReducer(
@@ -56,24 +66,51 @@ export const productsReducer = createReducer(
         }
     }),
     on(addToCart, (state, action) => {
-        return {
-            ...state,
-            cartOpen: true,
-            cart: [...state.cart, { products: action.payload, purchaseQuantity: 1}],
-        }
-    }),
-    on(updateCartQuantity, (state, action) => {
-        return {
-            ...state,
-            cartOpen: true,
-            cart: state.cart.map((elem) => {
-                return (action.payload.id === elem.products.id)
+
+        const callIndexCheck = indexCheck( action.payload, state.cart) 
+
+        const updateValues = (callIndexCheck === -1)
+            ? [...state.cart, {
+                products: action.payload,
+                purchaseQuantity: 1
+            } as Cart]
+            : state.cart.map((elem, index) => {
+                return (index === callIndexCheck)
                     ? {
-                        ...elem,
-                        purchaseQuantity: elem.purchaseQuantity + 1 
-                    }
+                        products: elem.products,
+                        purchaseQuantity: elem.purchaseQuantity + 1
+                    } as Cart
                     : elem
             })
+
+        return {
+            ...state,
+            cartOpen: true,
+            // cart: [...state.cart, { products: action.payload, purchaseQuantity: 1}],
+            cart: updateValues
+        }
+    }),
+    on(decrementItemFromCart, (state, action) => {
+
+        // let indexCheck = state.cart.findIndex(elem => elem.products.id === action.payload.id)
+
+        const callIndexCheck = indexCheck(action.payload, state.cart) 
+
+        const updateValue = (state.cart[callIndexCheck].purchaseQuantity === 1)
+            ? state.cart.filter((elem, index) => index !== callIndexCheck)
+            : state.cart.map((elem, index) => {
+                return (index === callIndexCheck)
+                    ? {
+                        products: elem.products,
+                        purchaseQuantity: elem.purchaseQuantity -1
+                    } as Cart
+                    : elem
+            })
+
+        return {
+            ...state,
+            cartOpen: true,
+            cart: updateValue
         }
     }),
     on(removeFromCart, (state, action) => {
@@ -89,6 +126,16 @@ export const productsReducer = createReducer(
             ...state,
             cartOpen: false,
             cart: [],
+        }
+    }),
+    on(cartSum, (state, action) => {
+        return {
+            ...state,
+            cartSum: Number(state.cart.reduce((acc, next) => {
+                return (state.cart.length !== 0)
+                    ? acc + (next.products.price * next.purchaseQuantity)
+                    : acc
+            }, 0).toFixed(2))
         }
     })
 

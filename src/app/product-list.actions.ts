@@ -20,7 +20,7 @@ export const addToCart = createAction(
     props<{ payload: Product }>()
 )
 
-export const updateCartQuantity = createAction(
+export const decrementItemFromCart = createAction(
     '[Product-List Component] Update Cart Quantity',
     props<{ payload: Product }>()
 )
@@ -34,6 +34,6 @@ export const clearCart = createAction(
     '[Product-List Component] Clear Cart',
 )
 
-export const increment = createAction(
-    '[Counter Component] Increment'
-);
+export const cartSum = createAction(
+    '[Product-List Component] Cart Sum'
+)
