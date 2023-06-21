@@ -82,6 +82,9 @@ export const productsReducer = createReducer(
                     } as Cart
                     : elem
             })
+        
+        console.log(updateValues);
+        
 
         return {
             ...state,
