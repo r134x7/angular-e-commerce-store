@@ -31,7 +31,7 @@ export const initialState: FeatureState = {
 }
 
 // helper function
-function indexCheck(product: Product, cart: Cart[]) {
+export function indexCheck(product: Product, cart: Cart[]): number {
     return (cart.length === 0)
       ? -1 
       : cart.findIndex(elem => elem.products.id === product.id) 

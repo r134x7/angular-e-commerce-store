@@ -7,6 +7,7 @@ import { DetailComponent } from './detail/detail.component';
 import { NoMatchComponent } from './no-match/no-match.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { NgrxHomePageComponent } from './ngrx-home-page/ngrx-home-page.component';
+import { NgrxDetailComponent } from './ngrx-detail/ngrx-detail.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", component: HomePageComponent},
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: "orderHistory", component: OrderHistoryComponent },
   { path: "products/:id", component: DetailComponent},
   { path: "ngrx", component: NgrxHomePageComponent},
+  { path: "ngrx/products/:id", component: NgrxDetailComponent},
   { path: "**", component: NoMatchComponent},
 ];
 

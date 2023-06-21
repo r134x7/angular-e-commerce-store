@@ -26,6 +26,7 @@ import { ProductListEffects } from './product-list.effects';
 import { productsReducer } from './product-list.reducer';
 import { NgrxCartComponent } from './ngrx-cart/ngrx-cart.component';
 import { NgrxCartItemsComponent } from './ngrx-cart-items/ngrx-cart-items.component';
+import { NgrxDetailComponent } from './ngrx-detail/ngrx-detail.component';
 
 @NgModule({
   declarations: [
@@ -48,13 +49,13 @@ import { NgrxCartItemsComponent } from './ngrx-cart-items/ngrx-cart-items.compon
     NgrxCategoryMenuComponent,
     NgrxProductListComponent,
     NgrxCartComponent,
-    NgrxCartItemsComponent
+    NgrxCartItemsComponent,
+    NgrxDetailComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     StoreModule.forRoot({ product: productsReducer }),
-    // StoreModule.forRoot({ product: productsReducer }),
     EffectsModule.forRoot([ProductListEffects])
   ],
   providers: [],
